@@ -10,13 +10,15 @@ namespace SGGames.Scripts.World
         [SerializeField] private TileController m_tilePrefab;
         [SerializeField] private int m_widthSize;
         [SerializeField] private int m_heightSize;
-        [SerializeField] private Vector2 m_playerSpawnPosition;
+        [SerializeField] private Vector2Int m_playerSpawnPosition;
         [SerializeField] private GameObject m_playerPrefab;
         
         private List<TileController> m_tileList;
+        private List<Vector2Int> m_enemySpotPositionList;
         
         private readonly float C_CENTER_OFFSET_Y = 0.5f;
         private readonly float C_CENTER_OFFSET_X = 0.5f;
+        private readonly int C_ENEMY_NUM_MAX = 10;
 
         private void Start()
         {
@@ -25,7 +27,12 @@ namespace SGGames.Scripts.World
 
         public Vector2 TileToWorldPosition(Vector2 tilePosition)
         {
-            return m_tileList[(int)(tilePosition.y * m_heightSize + tilePosition.x)].transform.position;
+            return GetTileAtTilePosition(tilePosition).transform.position;
+        }
+
+        public TileController GetTileAtTilePosition(Vector2 tilePosition)
+        {
+            return m_tileList[(int)(tilePosition.y * m_heightSize + tilePosition.x)];
         }
 
         #region Room Creation
@@ -33,6 +40,7 @@ namespace SGGames.Scripts.World
         {
             CreateRoomLayout(m_tilePrefab,m_widthSize, m_heightSize);
             CreatePlayer(m_playerPrefab, m_playerSpawnPosition);
+            FillEnemySpot(C_ENEMY_NUM_MAX);
         }
 
         private void CreateRoomLayout(TileController tilePrefab, int width, int height)
@@ -57,14 +65,38 @@ namespace SGGames.Scripts.World
             }
         }
 
-        private void CreatePlayer(GameObject playerPrefab, Vector2 spawnPos)
+        private void CreatePlayer(GameObject playerPrefab, Vector2Int spawnPos)
         {
             var player = Instantiate(playerPrefab);
             player.transform.position = m_tileList[(int)(spawnPos.y * m_heightSize + spawnPos.x)].transform.position;
             var movement = player.GetComponent<PlayerMovement>();
             movement.Initialize(this,spawnPos,m_widthSize,m_heightSize);
+            movement.OnPlayerFinishedMoving += OnPlayerFinishedMoving;
+        }
+
+        private void FillEnemySpot(int maxEnemy)
+        {
+            m_enemySpotPositionList = new List<Vector2Int>();
+
+            for (int i = 0; i < maxEnemy; i++)
+            {
+                var x = Random.Range(0, m_widthSize);
+                var y = Random.Range(0, m_widthSize);
+                m_enemySpotPositionList.Add(new Vector2Int(x, y));
+            }
         }
         #endregion
-        
+
+
+        private void OnPlayerFinishedMoving(Vector2Int playerPosition)
+        {
+            foreach (var spot in m_enemySpotPositionList)
+            {
+                if (spot == playerPosition)
+                {
+                    Debug.Log("Player is in enemy spot!");
+                }
+            }
+        }
     }
 }

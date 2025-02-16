@@ -24,7 +24,7 @@ namespace SGGames.Scripts.Entities
     {
         [SerializeField] protected EntityMovementState m_movementState;
         [SerializeField] protected MovementDirection m_movementDirection;
-        [SerializeField] protected Vector2 m_tileCurrentPosition;
+        [SerializeField] protected Vector2Int m_tileCurrentPosition;
         protected readonly float C_ENTITY_SPEED = 3f;
         
         protected Vector2 m_worldDestPosition;
@@ -33,7 +33,7 @@ namespace SGGames.Scripts.Entities
         protected int m_boundWidth;
         protected int m_boundHeight;
 
-        public void Initialize(RoomController roomController, Vector2 tilePosition,int boundWidth, int boundHeight)
+        public void Initialize(RoomController roomController, Vector2Int tilePosition,int boundWidth, int boundHeight)
         {
             m_roomController = roomController;
             m_boundWidth = boundWidth;
@@ -43,7 +43,7 @@ namespace SGGames.Scripts.Entities
             m_movementState = EntityMovementState.Idle;
         }
         
-        public void MoveTo(Vector2 tilePosition)
+        public void MoveTo(Vector2Int tilePosition)
         {
             if (m_movementState == EntityMovementState.Moving) return;
             if (tilePosition.x < 0 || tilePosition.x >= m_boundWidth || tilePosition.y < 0 ||
@@ -64,10 +64,15 @@ namespace SGGames.Scripts.Entities
             transform.position = Vector2.MoveTowards(transform.position, m_worldDestPosition, C_ENTITY_SPEED * Time.deltaTime);
             if ((Vector2)transform.position == m_worldDestPosition)
             {
-                transform.position = m_worldDestPosition;
-                m_movementState = EntityMovementState.Idle;
-                m_movementDirection = MovementDirection.NONE;
+                FinishMovement();
             }
+        }
+
+        protected virtual void FinishMovement()
+        {
+            transform.position = m_worldDestPosition;
+            m_movementState = EntityMovementState.Idle;
+            m_movementDirection = MovementDirection.NONE;
         }
 
         protected virtual void Update()

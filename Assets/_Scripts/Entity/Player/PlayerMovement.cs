@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 namespace SGGames.Scripts.Entities
 {
     public class PlayerMovement : EntityMovement
     {
+        public Action<Vector2Int> OnPlayerFinishedMoving;
+        
         protected override void Update()
         {
             UpdateInput();
@@ -32,26 +35,32 @@ namespace SGGames.Scripts.Entities
             }
             
 
-            var tileDest = Vector2.zero;
+            Vector2Int tileDest = Vector2Int.zero;
             switch (m_movementDirection)
             {
                 case MovementDirection.LEFT:
-                    tileDest = m_tileCurrentPosition + Vector2.left;
+                    tileDest = m_tileCurrentPosition + Vector2Int.left;
                     MoveTo(tileDest);
                     break;
                 case MovementDirection.RIGHT:
-                    tileDest = m_tileCurrentPosition + Vector2.right;
+                    tileDest = m_tileCurrentPosition + Vector2Int.right;
                     MoveTo(tileDest);
                     break;
                 case MovementDirection.UP:
-                    tileDest = m_tileCurrentPosition + Vector2.up;
+                    tileDest = m_tileCurrentPosition + Vector2Int.up;
                     MoveTo(tileDest);
                     break;
                 case MovementDirection.DOWN:
-                    tileDest = m_tileCurrentPosition + Vector2.down;
+                    tileDest = m_tileCurrentPosition + Vector2Int.down;
                     MoveTo(tileDest);
                     break;
             }
+        }
+
+        protected override void FinishMovement()
+        {
+            base.FinishMovement();
+            OnPlayerFinishedMoving?.Invoke(m_tileCurrentPosition);
         }
     }
 }
