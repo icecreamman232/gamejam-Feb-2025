@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using SGGames.Scripts.Core;
 using SGGames.Scripts.Entities;
+using SGGames.Scripts.Events;
+using SGGames.Scripts.Managers;
 using SGGames.Scripts.Tilesets;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -14,6 +17,7 @@ namespace SGGames.Scripts.World
         [SerializeField] private int m_heightSize;
         [SerializeField] private Vector2Int m_playerSpawnPosition;
         [SerializeField] private GameObject m_playerPrefab;
+        [SerializeField] private GameEvents m_gameEvents;
         
         private List<TileController> m_tileList;
         private List<Vector2Int> m_enemySpotPositionList;
@@ -98,8 +102,9 @@ namespace SGGames.Scripts.World
             {
                 if (spot == playerPosition)
                 {
-                    Debug.Log("Player is in enemy spot!");
+                    Debug.Log("Step on enemy! Starting combat...");
                     OnStepOnEnemySpot?.Invoke();
+                    m_gameEvents.Raise(GameEventsType.START_COMBAT);
                 }
             }
         }

@@ -1,5 +1,6 @@
 using System;
 using MoreMountains.Feedbacks;
+using SGGames.Scripts.Events;
 using SGGames.Scripts.World;
 using UnityEngine;
 
@@ -8,12 +9,21 @@ namespace SGGames.Scripts.Entities
     public class PlayerMovement : EntityMovement
     {
         [SerializeField] private MMF_Player m_excalmationMarkVFX;
+        [SerializeField] private GameEvents m_gameEvents;
+        [SerializeField] private BoolEvent m_playerFrozenEvent;
         public Action<Vector2Int> OnPlayerFinishedMoving;
 
         public override void Initialize(RoomController roomController, Vector2Int tilePosition, int boundWidth, int boundHeight)
         {
             base.Initialize(roomController, tilePosition, boundWidth, boundHeight);
             roomController.OnStepOnEnemySpot += PlayStepOnEnemySpotVFX;
+            m_playerFrozenEvent.AddListener(OnPlayerFrozen);
+        }
+        
+        private void OnDestroy()
+        {
+            m_playerFrozenEvent.RemoveListener(OnPlayerFrozen);
+            m_roomController.OnStepOnEnemySpot -= PlayStepOnEnemySpotVFX;
         }
 
         protected override void Update()
@@ -24,7 +34,7 @@ namespace SGGames.Scripts.Entities
 
         private void UpdateInput()
         {
-            if (m_movementState == EntityMovementState.Moving) return;
+            if (m_movementState == EntityMovementState.Moving || m_movementState == EntityMovementState.Forbidden) return;
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -75,6 +85,11 @@ namespace SGGames.Scripts.Entities
         private void PlayStepOnEnemySpotVFX()
         {
             m_excalmationMarkVFX.PlayFeedbacks();
+        }
+        
+        private void OnPlayerFrozen(bool isFrozen)
+        {
+            m_movementState = isFrozen ? EntityMovementState.Forbidden : EntityMovementState.Idle;
         }
     }
 }

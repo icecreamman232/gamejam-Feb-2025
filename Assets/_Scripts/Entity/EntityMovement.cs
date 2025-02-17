@@ -7,6 +7,7 @@ namespace SGGames.Scripts.Entities
 
     public enum EntityMovementState
     {
+        Forbidden,
         Idle,
         Moving,
     }
@@ -59,7 +60,7 @@ namespace SGGames.Scripts.Entities
 
         protected virtual void UpdateMovement()
         {
-            if (m_movementState == EntityMovementState.Idle) return;
+            if (m_movementState == EntityMovementState.Idle || m_movementState == EntityMovementState.Forbidden) return;
             
             transform.position = Vector2.MoveTowards(transform.position, m_worldDestPosition, C_ENTITY_SPEED * Time.deltaTime);
             if ((Vector2)transform.position == m_worldDestPosition)

@@ -134,6 +134,8 @@ MonoBehaviour:
   m_movementDirection: 0
   m_tileCurrentPosition: {x: 0, y: 0}
   m_excalmationMarkVFX: {fileID: 1605920942971018061}
+  m_gameEvents: {fileID: 11400000, guid: 8446973224615c34984e6c58e2239690, type: 2}
+  m_playerFrozenEvent: {fileID: 11400000, guid: 6cca19f7ab44b8443ba23b09335d568d, type: 2}
 --- !u!1001 &123910031983859451
 PrefabInstance:
   m_ObjectHideFlags: 0
