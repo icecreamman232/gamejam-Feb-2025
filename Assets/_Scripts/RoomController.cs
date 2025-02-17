@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using SGGames.Scripts.Entities;
 using SGGames.Scripts.Tilesets;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace SGGames.Scripts.World
 {
@@ -19,6 +21,8 @@ namespace SGGames.Scripts.World
         private readonly float C_CENTER_OFFSET_Y = 0.5f;
         private readonly float C_CENTER_OFFSET_X = 0.5f;
         private readonly int C_ENEMY_NUM_MAX = 10;
+
+        public Action OnStepOnEnemySpot;
 
         private void Start()
         {
@@ -95,6 +99,7 @@ namespace SGGames.Scripts.World
                 if (spot == playerPosition)
                 {
                     Debug.Log("Player is in enemy spot!");
+                    OnStepOnEnemySpot?.Invoke();
                 }
             }
         }

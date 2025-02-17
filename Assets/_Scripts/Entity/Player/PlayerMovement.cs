@@ -1,12 +1,21 @@
 using System;
+using MoreMountains.Feedbacks;
+using SGGames.Scripts.World;
 using UnityEngine;
 
 namespace SGGames.Scripts.Entities
 {
     public class PlayerMovement : EntityMovement
     {
+        [SerializeField] private MMF_Player m_excalmationMarkVFX;
         public Action<Vector2Int> OnPlayerFinishedMoving;
-        
+
+        public override void Initialize(RoomController roomController, Vector2Int tilePosition, int boundWidth, int boundHeight)
+        {
+            base.Initialize(roomController, tilePosition, boundWidth, boundHeight);
+            roomController.OnStepOnEnemySpot += PlayStepOnEnemySpotVFX;
+        }
+
         protected override void Update()
         {
             UpdateInput();
@@ -61,6 +70,11 @@ namespace SGGames.Scripts.Entities
         {
             base.FinishMovement();
             OnPlayerFinishedMoving?.Invoke(m_tileCurrentPosition);
+        }
+
+        private void PlayStepOnEnemySpotVFX()
+        {
+            m_excalmationMarkVFX.PlayFeedbacks();
         }
     }
 }

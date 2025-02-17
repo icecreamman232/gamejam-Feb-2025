@@ -33,7 +33,7 @@ namespace SGGames.Scripts.Entities
         protected int m_boundWidth;
         protected int m_boundHeight;
 
-        public void Initialize(RoomController roomController, Vector2Int tilePosition,int boundWidth, int boundHeight)
+        public virtual void Initialize(RoomController roomController, Vector2Int tilePosition,int boundWidth, int boundHeight)
         {
             m_roomController = roomController;
             m_boundWidth = boundWidth;

@@ -133,6 +133,7 @@ MonoBehaviour:
   m_movementState: 0
   m_movementDirection: 0
   m_tileCurrentPosition: {x: 0, y: 0}
+  m_excalmationMarkVFX: {fileID: 1605920942971018061}
 --- !u!1001 &123910031983859451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -190,6 +191,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1114f30941058ae4f8898681d6f9caac, type: 3}
+--- !u!114 &1605920942971018061 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1725255868416822710, guid: 1114f30941058ae4f8898681d6f9caac, type: 3}
+  m_PrefabInstance: {fileID: 123910031983859451}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4489147178895702801 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4608466749816778218, guid: 1114f30941058ae4f8898681d6f9caac, type: 3}
