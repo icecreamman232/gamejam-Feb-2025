@@ -9,6 +9,7 @@ namespace SGGames.Scripts.Abilities
     {
         [SerializeField] private AbilityData m_firstDefaultAbility;
         [SerializeField] private AbilityData m_secondDefaultAbility;
+        [SerializeField] private AbilityData m_thirdDefaultAbility;
         [SerializeField] private List<BaseAbility> m_playerAbilityList;
         
         private readonly int C_PLAYER_MAX_ABILITIES = 4;
@@ -25,6 +26,7 @@ namespace SGGames.Scripts.Abilities
             m_playerAbilityList = new List<BaseAbility>();
             m_playerAbilityList.Add(new BaseAbility(m_firstDefaultAbility));
             m_playerAbilityList.Add(new BaseAbility(m_secondDefaultAbility));
+            m_playerAbilityList.Add(new BaseAbility(m_thirdDefaultAbility));
         }
     }
 }

@@ -964,7 +964,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_firstDefaultAbility: {fileID: 11400000, guid: 702f63ffd3375fe4b8ddd7192862863a, type: 2}
-  m_secondDefaultAbility: {fileID: 11400000, guid: da3f49d8e136ca841bd5e78d14c442b3, type: 2}
+  m_secondDefaultAbility: {fileID: 11400000, guid: a902a8b63edd198488546f82e7fdc571, type: 2}
+  m_thirdDefaultAbility: {fileID: 11400000, guid: da3f49d8e136ca841bd5e78d14c442b3, type: 2}
   m_playerAbilityList: []
 --- !u!1 &1747848160
 GameObject:
