@@ -92,6 +92,9 @@ namespace SGGames.Scripts.World
                 var y = Random.Range(0, m_widthSize);
                 m_enemySpotPositionList.Add(new Vector2Int(x, y));
             }
+
+            //This is for testing
+            m_enemySpotPositionList[0] = new Vector2Int(1, 1);
         }
         #endregion
 

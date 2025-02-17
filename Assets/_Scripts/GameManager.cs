@@ -67,7 +67,7 @@ namespace SGGames.Scripts.Managers
             //Freeze player
             m_playerFrozenEvent.Raise(true);
             yield return m_waitBeforeStartCombat;
-            m_combatUIController.OpenCanvas();
+            m_combatUIController.SetCombatState(CombatState.Start);
         }
         
         private void OnReceiveGameEvents(GameEventsType gameEvents)

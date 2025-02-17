@@ -15,5 +15,5 @@ MonoBehaviour:
   m_icon: {fileID: -2022889149, guid: bc73973ae8a2dc346812ef1a91752d23, type: 3}
   m_minDamage: 5
   m_maxDamage: 10
-  m_attackSpeed: 1
+  m_attackCount: 2
   m_cooldown: 1

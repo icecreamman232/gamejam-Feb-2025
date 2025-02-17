@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CombatMomentUIController : MonoBehaviour
+namespace SGGames.Scripts.UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class CombatMomentUIController : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private Image m_icon;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void SetMoment(Sprite icon)
+        {
+            m_icon.sprite = icon;
+        }
     }
 }

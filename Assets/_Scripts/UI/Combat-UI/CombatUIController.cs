@@ -1,39 +1,79 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SGGames.Scripts.UI
 {
+    public enum CombatState
+    {
+        Start,
+        Preparing,
+        Combat,
+        Closed,
+    }
+    
     public class CombatUIController : MonoBehaviour
     {
-        [SerializeField] private CombatUIView m_combatUIView;
-        [Header("Moments")]
-        [SerializeField] private CombatMomentUIController m_momentControllerPrefab;
-        [SerializeField] private Transform m_momentParentPivot;
-        [SerializeField] private List<CombatMomentUIController> m_momentControllerList;
+        [SerializeField] private CombatState m_combatState = CombatState.Closed;
+        [SerializeField] private PreCombatUIView preCombatUIView;
 
         private readonly int C_DEFAULT_MOMENT_NUMBER = 3;
-
+        
+        
         private void Start()
         {
-            m_combatUIView.HideView();
-            
-            for (int i = 0; i < C_DEFAULT_MOMENT_NUMBER; i++)
+            preCombatUIView.HideView();
+            preCombatUIView.ChangeToCombatCallback += ChangeToCombatAction;
+        }
+
+        private void OnDestroy()
+        {
+            preCombatUIView.ChangeToCombatCallback -= ChangeToCombatAction;
+        }
+
+        private void Update()
+        {
+            switch (m_combatState)
             {
-                var moment  = Instantiate(m_momentControllerPrefab, m_momentParentPivot);
-                moment.name = $"Moment_{i}";
-                m_momentControllerList.Add(moment);
+                case CombatState.Start:
+                    StartCombatState();
+                    break;
+                case CombatState.Preparing:
+                    PrepareCombatState();
+                    break;
+                case CombatState.Combat:
+                    break;
+                case CombatState.Closed:
+                    break;
             }
         }
 
-        public void OpenCanvas()
+        private void StartCombatState()
         {
-            m_combatUIView.ShowView();
+            preCombatUIView.CreateView(5);
+            preCombatUIView.ShowView();
+
+            m_combatState = CombatState.Preparing;
         }
+
+        private void PrepareCombatState()
+        {
+            
+        }
+
+        private void ChangeToCombatAction()
+        {
+            SetCombatState(CombatState.Combat);
+        }
+        
 
         private void CloseCanvas()
         {
-            m_combatUIView.HideView();  
+            preCombatUIView.HideView();  
+        }
+
+        public void SetCombatState(CombatState combatState)
+        {
+            m_combatState = combatState;
         }
     }
 }
