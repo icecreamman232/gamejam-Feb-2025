@@ -22,6 +22,7 @@ namespace SGGames.Scripts.World
         private readonly int C_TRAP_NUM_MAX = 10;
         
         private PlayerMovement m_playerMovement;
+        private PlayerWeapon m_playerWeapon;
 
         private void Start()
         {
@@ -82,6 +83,8 @@ namespace SGGames.Scripts.World
             m_playerMovement = player.GetComponent<PlayerMovement>();
             m_playerMovement.Initialize(this,spawnPos,m_widthSize,m_heightSize);
             m_playerMovement.OnPlayerFinishedMoving += OnPlayerFinishedMoving;
+
+            m_playerWeapon = player.GetComponent<PlayerWeapon>();
         }
 
         private void FillTrapSpot(int maxEnemy)
@@ -101,13 +104,10 @@ namespace SGGames.Scripts.World
             var stair = Instantiate(m_stairPrefab,TileToWorldPosition(m_widthSize-1,m_heightSize-1),Quaternion.identity,transform);
         }
         #endregion
-        
-        public bool IsInPlayerRange(Vector2Int tilePosition)
+
+        private bool HasTrapSpot(Vector2Int tilePosition)
         {
-            var playerPos = m_playerMovement.TilePosition;
-            var isInHorizontally = Mathf.Abs(tilePosition.x - playerPos.x) < 2;
-            var isInVertically = Mathf.Abs(tilePosition.y - playerPos.y) < 2;
-            return isInHorizontally && isInVertically;
+            return m_trapSpotPositionList.Contains(tilePosition);
         }
         
         private void OnPlayerFinishedMoving(Vector2Int playerPosition)
@@ -119,6 +119,23 @@ namespace SGGames.Scripts.World
                     Debug.Log("Player is in trap spot!");
                 }
             }
+        }
+
+        public void OnCheckTile(Vector2Int tilePosition)
+        {
+            if (HasTrapSpot(tilePosition))
+            {
+                Debug.Log("There's a trap!");
+                m_playerWeapon.TakeDamage(1);
+            }
+        }
+        
+        public bool IsInPlayerRange(Vector2Int tilePosition)
+        {
+            var playerPos = m_playerMovement.TilePosition;
+            var isInHorizontally = Mathf.Abs(tilePosition.x - playerPos.x) < 2;
+            var isInVertically = Mathf.Abs(tilePosition.y - playerPos.y) < 2;
+            return isInHorizontally && isInVertically;
         }
     }
 }

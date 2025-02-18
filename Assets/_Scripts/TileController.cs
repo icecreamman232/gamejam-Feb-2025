@@ -1,4 +1,3 @@
-using System;
 using SGGames.Scripts.World;
 using UnityEngine;
 
@@ -25,6 +24,11 @@ namespace SGGames.Scripts.Tilesets
         private void OnMouseExit()
         {
             m_spriteRenderer.color= Color.white;
+        }
+
+        private void OnMouseDown()
+        {
+            m_roomController.OnCheckTile(m_tilePosition);
         }
     }
 }

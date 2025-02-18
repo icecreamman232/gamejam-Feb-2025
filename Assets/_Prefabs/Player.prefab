@@ -162,6 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd4f3d6d97d8334c8474de7c0a9abb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_currentHealth: 0
+  m_updateWeaponHealthEvent: {fileID: 11400000, guid: 3cd3f82a4af42b840a6920565a7092e0, type: 2}
 --- !u!1001 &123910031983859451
 PrefabInstance:
   m_ObjectHideFlags: 0

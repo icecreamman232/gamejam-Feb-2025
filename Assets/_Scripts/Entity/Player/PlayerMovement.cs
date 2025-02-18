@@ -17,19 +17,19 @@ namespace SGGames.Scripts.Entities
         {
             if (m_movementState == EntityMovementState.Moving) return;
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.W))
             {
                 m_movementDirection = MovementDirection.UP;
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            else if (Input.GetKeyDown(KeyCode.S))
             {
                 m_movementDirection = MovementDirection.DOWN;
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            else if (Input.GetKeyDown(KeyCode.A))
             {
                 m_movementDirection = MovementDirection.LEFT;
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            else if (Input.GetKeyDown(KeyCode.D))
             {
                 m_movementDirection = MovementDirection.RIGHT;
             }

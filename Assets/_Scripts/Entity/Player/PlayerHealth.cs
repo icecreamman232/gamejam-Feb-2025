@@ -14,7 +14,11 @@ namespace SGGames.Scripts.Entities
              m_maxHealth = m_initialHealth;
              m_currentHealth = m_maxHealth;
         }
-        
+
+        public bool CanTakeDamage()
+        {
+            return m_currentHealth > 0;
+        }
         public void TakeDamage(int damage)
         {
             if (m_currentHealth <= 0) return;
@@ -27,7 +31,7 @@ namespace SGGames.Scripts.Entities
 
         private void Kill()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
