@@ -109,22 +109,32 @@ namespace SGGames.Scripts.World
         {
             return m_trapSpotPositionList.Contains(tilePosition);
         }
+
+        private void RemoveTrapAt(Vector2Int tilePosition)
+        {
+            m_trapSpotPositionList.Remove(tilePosition);
+        }
         
         private void OnPlayerFinishedMoving(Vector2Int playerPosition)
         {
+            var trapPos = Vector2Int.zero;
             foreach (var spot in m_trapSpotPositionList)
             {
                 if (spot == playerPosition)
                 {
-                    Debug.Log("Player is in trap spot!");
+                    trapPos = spot;
+                    Debug.Log("There's a trap!");
+                    m_playerWeapon.TakeDamage(1);
                 }
             }
+            RemoveTrapAt(trapPos);
         }
 
         public void OnCheckTile(Vector2Int tilePosition)
         {
             if (HasTrapSpot(tilePosition))
             {
+                RemoveTrapAt(tilePosition);
                 Debug.Log("There's a trap!");
                 m_playerWeapon.TakeDamage(1);
             }
