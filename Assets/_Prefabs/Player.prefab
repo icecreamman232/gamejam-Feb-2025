@@ -94,6 +94,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5165465461310918438}
   - component: {fileID: 6619261438253456971}
+  - component: {fileID: 7289220539033607673}
+  - component: {fileID: 4386978276820307000}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -133,6 +135,33 @@ MonoBehaviour:
   m_movementState: 0
   m_movementDirection: 0
   m_tileCurrentPosition: {x: 0, y: 0}
+--- !u!114 &7289220539033607673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7471863108993015455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a316ec43df0a142a05f4242468f305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_initialHealth: 3
+  m_currentHealth: 0
+  m_maxHealth: 0
+--- !u!114 &4386978276820307000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7471863108993015455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd4f3d6d97d8334c8474de7c0a9abb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &123910031983859451
 PrefabInstance:
   m_ObjectHideFlags: 0

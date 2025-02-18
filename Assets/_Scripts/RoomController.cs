@@ -12,6 +12,7 @@ namespace SGGames.Scripts.World
         [SerializeField] private int m_heightSize;
         [SerializeField] private Vector2Int m_playerSpawnPosition;
         [SerializeField] private GameObject m_playerPrefab;
+        [SerializeField] private GameObject m_stairPrefab;
         
         private List<TileController> m_tileList;
         private List<Vector2Int> m_trapSpotPositionList;
@@ -24,21 +25,27 @@ namespace SGGames.Scripts.World
         {
             Initialize();
         }
-
-        public Vector2 TileToWorldPosition(Vector2 tilePosition)
+        
+        public Vector2 TileToWorldPosition(Vector2Int tilePosition)
         {
             return GetTileAtTilePosition(tilePosition).transform.position;
         }
 
-        public TileController GetTileAtTilePosition(Vector2 tilePosition)
+        public Vector2 TileToWorldPosition(int x, int y)
         {
-            return m_tileList[(int)(tilePosition.y * m_heightSize + tilePosition.x)];
+            return GetTileAtTilePosition(new Vector2Int(x,y)).transform.position;
+        }
+
+        public TileController GetTileAtTilePosition(Vector2Int tilePosition)
+        {
+            return m_tileList[(tilePosition.y * m_heightSize + tilePosition.x)];
         }
 
         #region Room Creation
         private void Initialize()
         {
             CreateRoomLayout(m_tilePrefab,m_widthSize, m_heightSize);
+            CreateStair();
             CreatePlayer(m_playerPrefab, m_playerSpawnPosition);
             FillTrapSpot(C_TRAP_NUM_MAX);
         }
@@ -84,6 +91,11 @@ namespace SGGames.Scripts.World
                 var y = Random.Range(0, m_widthSize);
                 m_trapSpotPositionList.Add(new Vector2Int(x, y));
             }
+        }
+
+        private void CreateStair()
+        {
+            var stair = Instantiate(m_stairPrefab,TileToWorldPosition(m_widthSize-1,m_heightSize-1),Quaternion.identity,transform);
         }
         #endregion
 

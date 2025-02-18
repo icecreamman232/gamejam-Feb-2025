@@ -415,6 +415,7 @@ MonoBehaviour:
   m_heightSize: 10
   m_playerSpawnPosition: {x: 0, y: 0}
   m_playerPrefab: {fileID: 7471863108993015455, guid: a45be0858d198a74793c726db412d978, type: 3}
+  m_stairPrefab: {fileID: 5383818455364682024, guid: ffe4293896176ab47820d68da5581935, type: 3}
 --- !u!1 &1377994067
 GameObject:
   m_ObjectHideFlags: 0
