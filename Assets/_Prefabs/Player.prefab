@@ -185,6 +185,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exclamation-mark
       objectReference: {fileID: 0}
+    - target: {fileID: 7539654560473164688, guid: 1114f30941058ae4f8898681d6f9caac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

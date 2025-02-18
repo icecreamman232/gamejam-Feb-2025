@@ -14,11 +14,11 @@ namespace SGGames.Scripts.World
         [SerializeField] private GameObject m_playerPrefab;
         
         private List<TileController> m_tileList;
-        private List<Vector2Int> m_enemySpotPositionList;
+        private List<Vector2Int> m_trapSpotPositionList;
         
         private readonly float C_CENTER_OFFSET_Y = 0.5f;
         private readonly float C_CENTER_OFFSET_X = 0.5f;
-        private readonly int C_ENEMY_NUM_MAX = 10;
+        private readonly int C_TRAP_NUM_MAX = 10;
 
         private void Start()
         {
@@ -40,7 +40,7 @@ namespace SGGames.Scripts.World
         {
             CreateRoomLayout(m_tilePrefab,m_widthSize, m_heightSize);
             CreatePlayer(m_playerPrefab, m_playerSpawnPosition);
-            FillEnemySpot(C_ENEMY_NUM_MAX);
+            FillTrapSpot(C_TRAP_NUM_MAX);
         }
 
         private void CreateRoomLayout(TileController tilePrefab, int width, int height)
@@ -74,15 +74,15 @@ namespace SGGames.Scripts.World
             movement.OnPlayerFinishedMoving += OnPlayerFinishedMoving;
         }
 
-        private void FillEnemySpot(int maxEnemy)
+        private void FillTrapSpot(int maxEnemy)
         {
-            m_enemySpotPositionList = new List<Vector2Int>();
+            m_trapSpotPositionList = new List<Vector2Int>();
 
             for (int i = 0; i < maxEnemy; i++)
             {
                 var x = Random.Range(0, m_widthSize);
                 var y = Random.Range(0, m_widthSize);
-                m_enemySpotPositionList.Add(new Vector2Int(x, y));
+                m_trapSpotPositionList.Add(new Vector2Int(x, y));
             }
         }
         #endregion
@@ -90,11 +90,11 @@ namespace SGGames.Scripts.World
 
         private void OnPlayerFinishedMoving(Vector2Int playerPosition)
         {
-            foreach (var spot in m_enemySpotPositionList)
+            foreach (var spot in m_trapSpotPositionList)
             {
                 if (spot == playerPosition)
                 {
-                    Debug.Log("Player is in enemy spot!");
+                    Debug.Log("Player is in trap spot!");
                 }
             }
         }
