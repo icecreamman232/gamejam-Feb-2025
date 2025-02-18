@@ -1,4 +1,5 @@
 using System;
+using MoreMountains.Feedbacks;
 using SGGames.Scripts.Events;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace SGGames.Scripts.Entities
     {
         [SerializeField] private int m_currentHealth;
         [SerializeField] private IntEvent m_updateWeaponHealthEvent;
+        [SerializeField] private MMF_Player m_hurtFeedback;
         
         private PlayerHealth m_playerHealth;
         private readonly int C_MAX_WEAPON_HEALTH = 3;
@@ -27,6 +29,7 @@ namespace SGGames.Scripts.Entities
                 return;
             }
             m_currentHealth -= damage;
+            m_hurtFeedback.PlayFeedbacks();
             m_updateWeaponHealthEvent.Raise(m_currentHealth);
             if (m_currentHealth <= 0)
             {

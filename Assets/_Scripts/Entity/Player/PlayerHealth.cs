@@ -1,4 +1,5 @@
 using System;
+using MoreMountains.Feedbacks;
 using SGGames.Scripts.Events;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace SGGames.Scripts.Entities
         [SerializeField] private int m_currentHealth;
         [SerializeField] private int m_maxHealth;
         [SerializeField] private IntEvent m_updateHealthEvent;
+        [SerializeField] private MMF_Player m_hurtFeedback;
 
         private void Start()
         {
@@ -27,6 +29,7 @@ namespace SGGames.Scripts.Entities
             if (m_currentHealth <= 0) return;
             m_currentHealth -= damage;
             m_updateHealthEvent.Raise(m_currentHealth);
+            m_hurtFeedback.PlayFeedbacks();
             if (m_currentHealth <= 0)
             {
                 Kill();
