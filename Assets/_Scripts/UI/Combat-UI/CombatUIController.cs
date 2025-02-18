@@ -14,6 +14,7 @@ namespace SGGames.Scripts.UI
     public class CombatUIController : MonoBehaviour
     {
         [SerializeField] private CombatState m_combatState = CombatState.Closed;
+        [SerializeField] private CanvasGroup m_combatCanvasGroup;
         [SerializeField] private PreCombatUIView preCombatUIView;
 
         private readonly int C_DEFAULT_MOMENT_NUMBER = 3;
@@ -21,7 +22,9 @@ namespace SGGames.Scripts.UI
         
         private void Start()
         {
-            preCombatUIView.HideView();
+            m_combatCanvasGroup.alpha = 0;
+            m_combatCanvasGroup.blocksRaycasts = false;
+            m_combatCanvasGroup.interactable = false;
             preCombatUIView.ChangeToCombatCallback += ChangeToCombatAction;
         }
 
@@ -49,6 +52,10 @@ namespace SGGames.Scripts.UI
 
         private void StartCombatState()
         {
+            m_combatCanvasGroup.alpha = 1;
+            m_combatCanvasGroup.blocksRaycasts = true;
+            m_combatCanvasGroup.interactable = true;
+            
             preCombatUIView.CreateView(5);
             preCombatUIView.ShowView();
 

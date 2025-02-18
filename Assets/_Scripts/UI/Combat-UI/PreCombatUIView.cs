@@ -76,12 +76,18 @@ namespace SGGames.Scripts.UI
             m_currentMomentIndex++;
             if (m_currentMomentIndex >= m_momentControllerList.Count)
             {
+                m_canvasGroup.alpha = 0;
+                m_canvasGroup.interactable = false;
+                m_canvasGroup.blocksRaycasts = false;
                 ChangeToCombatCallback?.Invoke();
             }
         }
 
         public void OnPressStartCombatButton()
         {
+            m_canvasGroup.alpha = 0;
+            m_canvasGroup.interactable = false;
+            m_canvasGroup.blocksRaycasts = false;
             ChangeToCombatCallback?.Invoke();
         }
     }
