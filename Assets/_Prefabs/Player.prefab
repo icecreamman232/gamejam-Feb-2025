@@ -150,6 +150,7 @@ MonoBehaviour:
   m_initialHealth: 3
   m_currentHealth: 0
   m_maxHealth: 0
+  m_updateHealthEvent: {fileID: 11400000, guid: 9081d2f5498845241a17f7e6a73cb1e3, type: 2}
 --- !u!114 &4386978276820307000
 MonoBehaviour:
   m_ObjectHideFlags: 0
