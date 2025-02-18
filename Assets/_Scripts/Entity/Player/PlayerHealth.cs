@@ -1,5 +1,6 @@
-using System;
+using System.Collections;
 using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 using SGGames.Scripts.Events;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ namespace SGGames.Scripts.Entities
         [SerializeField] private int m_maxHealth;
         [SerializeField] private IntEvent m_updateHealthEvent;
         [SerializeField] private MMF_Player m_hurtFeedback;
+        [SerializeField] private MMAnimationParameter m_deadAnim;
+        [SerializeField] private float m_deadAnimDuration;
 
         private void Start()
         {
@@ -38,7 +41,14 @@ namespace SGGames.Scripts.Entities
 
         private void Kill()
         {
-            
+            StartCoroutine(KillCoroutine());
+        }
+
+        private IEnumerator KillCoroutine()
+        {
+            m_deadAnim.SetTrigger();
+            yield return new WaitForSeconds(m_deadAnimDuration);
+            this.gameObject.SetActive(false);
         }
     }
 }

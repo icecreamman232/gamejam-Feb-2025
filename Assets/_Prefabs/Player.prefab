@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8923414255715704863}
   - component: {fileID: 225998609460331075}
   - component: {fileID: 2991685130942887463}
+  - component: {fileID: 7247018120443245447}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -163,6 +164,27 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   StartShakingButton: 0
+--- !u!95 &7247018120443245447
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5493836233083585228}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6f146e11f4b2e574b927fe05dcebae26, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7402936757275776295
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,6 +570,7 @@ Transform:
   - {fileID: 8923414255715704863}
   - {fileID: 4489147178895702801}
   - {fileID: 4735335284101225948}
+  - {fileID: 8907631699585033886}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6619261438253456971
@@ -582,6 +605,8 @@ MonoBehaviour:
   m_maxHealth: 0
   m_updateHealthEvent: {fileID: 11400000, guid: 9081d2f5498845241a17f7e6a73cb1e3, type: 2}
   m_hurtFeedback: {fileID: 8327221601448172258}
+  m_deadAnim: {fileID: 8481785842830689568}
+  m_deadAnimDuration: 0.517
 --- !u!114 &4386978276820307000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,6 +622,52 @@ MonoBehaviour:
   m_currentHealth: 0
   m_updateWeaponHealthEvent: {fileID: 11400000, guid: 3cd3f82a4af42b840a6920565a7092e0, type: 2}
   m_hurtFeedback: {fileID: 8327221601448172258}
+--- !u!1 &8070944894943001293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8907631699585033886}
+  - component: {fileID: 8481785842830689568}
+  m_Layer: 0
+  m_Name: DeadAnim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8907631699585033886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8070944894943001293}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5165465461310918438}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8481785842830689568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8070944894943001293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5451e999c8f9dfb41aa3b2894ffc3d60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParameterName: Dead
+  TargetAnimator: {fileID: 7247018120443245447}
 --- !u!1001 &123910031983859451
 PrefabInstance:
   m_ObjectHideFlags: 0
