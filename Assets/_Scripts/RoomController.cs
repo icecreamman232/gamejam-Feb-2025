@@ -20,6 +20,8 @@ namespace SGGames.Scripts.World
         private readonly float C_CENTER_OFFSET_Y = 0.5f;
         private readonly float C_CENTER_OFFSET_X = 0.5f;
         private readonly int C_TRAP_NUM_MAX = 10;
+        
+        private PlayerMovement m_playerMovement;
 
         private void Start()
         {
@@ -66,6 +68,7 @@ namespace SGGames.Scripts.World
                     var newTile = Instantiate(tilePrefab,
                         new Vector3(i- offsetX + C_CENTER_OFFSET_X,j - offsetY + C_CENTER_OFFSET_Y,0), 
                         Quaternion.identity,transform);
+                    newTile.Initialize(this,new Vector2Int(i,j));
                     newTile.name = $"Tile x{i}-y{j}";
                     m_tileList.Add(newTile);
                 }  
@@ -76,9 +79,9 @@ namespace SGGames.Scripts.World
         {
             var player = Instantiate(playerPrefab);
             player.transform.position = m_tileList[(int)(spawnPos.y * m_heightSize + spawnPos.x)].transform.position;
-            var movement = player.GetComponent<PlayerMovement>();
-            movement.Initialize(this,spawnPos,m_widthSize,m_heightSize);
-            movement.OnPlayerFinishedMoving += OnPlayerFinishedMoving;
+            m_playerMovement = player.GetComponent<PlayerMovement>();
+            m_playerMovement.Initialize(this,spawnPos,m_widthSize,m_heightSize);
+            m_playerMovement.OnPlayerFinishedMoving += OnPlayerFinishedMoving;
         }
 
         private void FillTrapSpot(int maxEnemy)
@@ -98,8 +101,15 @@ namespace SGGames.Scripts.World
             var stair = Instantiate(m_stairPrefab,TileToWorldPosition(m_widthSize-1,m_heightSize-1),Quaternion.identity,transform);
         }
         #endregion
-
-
+        
+        public bool IsInPlayerRange(Vector2Int tilePosition)
+        {
+            var playerPos = m_playerMovement.TilePosition;
+            var isInHorizontally = Mathf.Abs(tilePosition.x - playerPos.x) < 2;
+            var isInVertically = Mathf.Abs(tilePosition.y - playerPos.y) < 2;
+            return isInHorizontally && isInVertically;
+        }
+        
         private void OnPlayerFinishedMoving(Vector2Int playerPosition)
         {
             foreach (var spot in m_trapSpotPositionList)

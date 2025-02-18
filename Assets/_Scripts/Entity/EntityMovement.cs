@@ -32,6 +32,8 @@ namespace SGGames.Scripts.Entities
         protected RoomController m_roomController;
         protected int m_boundWidth;
         protected int m_boundHeight;
+        
+        public Vector2Int TilePosition => m_tileCurrentPosition;
 
         public void Initialize(RoomController roomController, Vector2Int tilePosition,int boundWidth, int boundHeight)
         {
