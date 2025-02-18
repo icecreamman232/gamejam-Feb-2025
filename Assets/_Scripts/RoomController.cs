@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SGGames.Scripts.Data;
 using SGGames.Scripts.Entities;
 using SGGames.Scripts.Tilesets;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace SGGames.Scripts.World
         [SerializeField] private Vector2Int m_playerSpawnPosition;
         [SerializeField] private GameObject m_playerPrefab;
         [SerializeField] private GameObject m_stairPrefab;
+        [SerializeField] private FloorDataContainer m_floorDataContainer;
+        [SerializeField] private int m_currentFloorIndex;
         
         private List<TileController> m_tileList;
         private List<Vector2Int> m_trapSpotPositionList;
@@ -47,10 +50,12 @@ namespace SGGames.Scripts.World
         #region Room Creation
         private void Initialize()
         {
+            m_currentFloorIndex = 0;
+            
             CreateRoomLayout(m_tilePrefab,m_widthSize, m_heightSize);
             CreateStair();
             CreatePlayer(m_playerPrefab, m_playerSpawnPosition);
-            FillTrapSpot(C_TRAP_NUM_MAX);
+            FillTrapSpot();
         }
 
         private void CreateRoomLayout(TileController tilePrefab, int width, int height)
@@ -87,8 +92,10 @@ namespace SGGames.Scripts.World
             m_playerWeapon = player.GetComponent<PlayerWeapon>();
         }
 
-        private void FillTrapSpot(int maxEnemy)
+        private void FillTrapSpot()
         {
+            var floorData = m_floorDataContainer.GetFloorData(m_currentFloorIndex);
+            var maxEnemy = floorData.TrapNumber;
             m_trapSpotPositionList = new List<Vector2Int>();
 
             for (int i = 0; i < maxEnemy; i++)

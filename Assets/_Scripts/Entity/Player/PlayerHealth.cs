@@ -16,11 +16,15 @@ namespace SGGames.Scripts.Entities
         [SerializeField] private MMAnimationParameter m_deadAnim;
         [SerializeField] private float m_deadAnimDuration;
 
+        private WaitForSeconds m_delayAfterDeadAnimPlayed;
+        private Coroutine m_killCoroutine;
+
         private void Start()
         {
-             m_maxHealth = m_initialHealth;
-             m_currentHealth = m_maxHealth;
-             m_updateHealthEvent.Raise(m_currentHealth);
+            m_delayAfterDeadAnimPlayed = new WaitForSeconds(m_deadAnimDuration);
+            m_maxHealth = m_initialHealth;
+            m_currentHealth = m_maxHealth;
+            m_updateHealthEvent.Raise(m_currentHealth);
         }
 
         public bool CanTakeDamage()
@@ -41,13 +45,17 @@ namespace SGGames.Scripts.Entities
 
         private void Kill()
         {
-            StartCoroutine(KillCoroutine());
+            if (m_killCoroutine != null)
+            {
+                StopCoroutine(m_killCoroutine);
+            }
+            m_killCoroutine = StartCoroutine(KillCoroutine());
         }
 
         private IEnumerator KillCoroutine()
         {
             m_deadAnim.SetTrigger();
-            yield return new WaitForSeconds(m_deadAnimDuration);
+            yield return m_delayAfterDeadAnimPlayed;
             this.gameObject.SetActive(false);
         }
     }

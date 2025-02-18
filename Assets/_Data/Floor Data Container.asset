@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbabf3399257ce408f5663fede2dd83, type: 3}
+  m_Name: Floor Data Container
+  m_EditorClassIdentifier: 
+  m_floorData:
+  - TrapNumber: 10
+  - TrapNumber: 15
+  - TrapNumber: 20
+  - TrapNumber: 25
+  - TrapNumber: 30
+  - TrapNumber: 40
+  - TrapNumber: 50
